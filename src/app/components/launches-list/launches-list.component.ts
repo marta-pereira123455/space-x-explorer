@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 
 import { SpacexService } from '../../services/spacex.service';
 
+import { Launch } from '../../models/launch.model';
+
 @Component({
   selector: 'app-launches-list',
   standalone: true,
@@ -32,8 +34,8 @@ export class LaunchesListComponent implements OnInit {
 
   private sub!: Subscription;
 
-  allLaunches: any[] = [];
-  filteredLaunches: any[] = [];
+  allLaunches: Launch[] = [];
+  filteredLaunches: Launch[] = [];
   searchTerm = '';
 
   ngOnInit() {
@@ -41,15 +43,15 @@ export class LaunchesListComponent implements OnInit {
   }
 
   private loadLaunches() {
-    this.sub = this.spacexService.getPastLaunches().subscribe((data: any) => {
+    this.sub = this.spacexService.getPastLaunches().subscribe((data: Launch[]) => {
       this.allLaunches = data;
       this.filteredLaunches = data;
     });
   }
 
   onSearchChange() {
-    this.filteredLaunches = this.allLaunches.filter((launch) =>
-      launch.name.includes(this.searchTerm),
+    this.filteredLaunches = this.allLaunches.filter((launch: Launch) =>
+      launch.mission_name.includes(this.searchTerm),
     );
   }
 }
