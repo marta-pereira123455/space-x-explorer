@@ -1,11 +1,14 @@
 import { createAction, props } from '@ngrx/store';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { Launch } from '../models/launch.model';
 
 export const loadLaunches = createAction('[Launch List] Load Launches');
 export const loadLaunchesSuccess = createAction(
   '[Launch List] Load Success',
-  props<{ launches: any[] }>(),
+  props<{ launches: Launch[] }>(),
 );
 export const loadLaunchesFailure = createAction(
   '[Launch List] Load Failure',
-  props<{ error: any }>(),
+  props<{ error: HttpErrorResponse }>(),
 );

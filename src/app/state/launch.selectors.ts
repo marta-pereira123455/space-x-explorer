@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { LaunchState } from './launch.reducer';
+import { LaunchState } from '../models/launch-state.model';
 
 export const selectLaunchState = createFeatureSelector<LaunchState>('launch');
 
