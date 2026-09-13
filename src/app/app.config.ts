@@ -14,14 +14,14 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    
+
     provideStore({ launch: launchReducer }),
-    
+
     provideEffects([LaunchEffects]),
 
     provideStoreDevtools({
       maxAge: 25,
-      logOnly: false
-    })
-  ]
+      logOnly: false,
+    }),
+  ],
 };
