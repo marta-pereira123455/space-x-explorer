@@ -43,7 +43,11 @@
                 Flight n°{{ launch.flight_number }}
               </mat-card-subtitle>
 
-              <mat-icon>
+              <mat-icon
+                (click)="
+                  toggleFavorite(launch.flight_number); $event.stopPropagation()
+                "
+              >
                 {{
                   isFavorite(data.favoriteIds, launch.flight_number)
                     ? 'star'

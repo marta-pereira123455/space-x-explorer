@@ -15,7 +15,7 @@ import { Store } from '@ngrx/store';
 
 import { Launch } from '../../models/launch.model';
 
-import { loadLaunch } from '../../state/launch.actions';
+import { loadLaunch, toggleFavorite } from '../../state/launch.actions';
 import {
   selectError,
   selectFavoriteLaunches,
@@ -75,5 +75,9 @@ export class LaunchDetailsComponent implements OnInit {
 
   navigateToLaunchesList() {
     this.router.navigateByUrl('');
+  }
+
+  toggleFavorite(flightNumber: number) {
+    this.store.dispatch(toggleFavorite({ flightNumber }));
   }
 }

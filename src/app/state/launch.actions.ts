@@ -25,3 +25,8 @@ export const loadLaunchFailure = createAction(
   '[Launch] Load Failure',
   props<{ error: HttpErrorResponse }>(),
 );
+
+export const toggleFavorite = createAction(
+  '[Launch] Toggle Favorite',
+  props<{ flightNumber: number }>(),
+);

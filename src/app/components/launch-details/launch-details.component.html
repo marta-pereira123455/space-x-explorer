@@ -27,7 +27,7 @@
             Flight n°{{ launch.flight_number }}
           </mat-card-subtitle>
 
-          <mat-icon>
+          <mat-icon (click)="toggleFavorite(launch.flight_number)">
             {{ data.isFavorite ? 'star' : 'star_border' }}
           </mat-icon>
         </mat-card-header>

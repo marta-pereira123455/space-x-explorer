@@ -36,4 +36,14 @@ export const launchReducer = createReducer(
     loading: false,
     error,
   })),
+  on(LaunchActions.toggleFavorite, (state, { flightNumber }) => {
+    const isFavorite = state.favoriteLaunches.includes(flightNumber);
+
+    return {
+      ...state,
+      favoriteLaunches: isFavorite
+        ? state.favoriteLaunches.filter((id) => id !== flightNumber)
+        : [...state.favoriteLaunches, flightNumber],
+    };
+  }),
 );

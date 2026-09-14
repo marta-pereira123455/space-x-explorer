@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 
 import { Launch } from '../../models/launch.model';
 
-import { loadLaunches } from '../../state/launch.actions';
+import { loadLaunches, toggleFavorite } from '../../state/launch.actions';
 import {
   selectAllLaunches,
   selectError,
@@ -68,6 +68,10 @@ export class LaunchesListComponent implements OnInit {
     );
   }
 
+  isFavorite(favoriteIds: number[], flightNumber: number): boolean {
+    return favoriteIds.includes(flightNumber);
+  }
+
   navigateToLaunch(flightNumber: number) {
     this.router.navigateByUrl(`launch/${flightNumber}`);
   }
@@ -78,7 +82,7 @@ export class LaunchesListComponent implements OnInit {
     );
   }
 
-  isFavorite(favoriteIds: number[], flightNumber: number): boolean {
-    return favoriteIds.includes(flightNumber);
+  toggleFavorite(flightNumber: number) {
+    this.store.dispatch(toggleFavorite({ flightNumber }));
   }
 }
