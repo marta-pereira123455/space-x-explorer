@@ -61,7 +61,7 @@ export class LaunchesListComponent implements OnInit {
       this.store.select(selectIsLoading),
     ]).pipe(
       map(([allLaunches, error, favoriteIds, loading]) => {
-        this.filteredLaunches = allLaunches;
+        if (!this.searchTerm) this.filteredLaunches = allLaunches;
 
         return { allLaunches, error, favoriteIds, loading };
       }),
