@@ -37,6 +37,35 @@
             <mat-icon>calendar_today</mat-icon>
             {{ launch.launch_date_local | date: 'dd/MM/yyyy' }}
           </p>
+
+          @if (launch.details) {
+            <p><strong>Details:</strong> {{ launch.details }}</p>
+          }
+
+          @if (launch.launch_failure_details) {
+            <p><strong>Launch Failure Details:</strong></p>
+
+            @if (launch.launch_failure_details.time) {
+              <p>
+                <strong>> Time:</strong>
+                {{ launch.launch_failure_details.time }}
+              </p>
+            }
+
+            @if (launch.launch_failure_details.altitude) {
+              <p>
+                <strong>> Altitude:</strong>
+                {{ launch.launch_failure_details.altitude }}
+              </p>
+            }
+
+            @if (launch.launch_failure_details.reason) {
+              <p>
+                <strong>> Reason:</strong>
+                {{ launch.launch_failure_details.reason }}
+              </p>
+            }
+          }
         </mat-card-content>
 
         <mat-card-actions class="card-actions">
