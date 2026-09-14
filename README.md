@@ -52,6 +52,22 @@ ng build
 
 The generated files will be available in the `dist/` directory.
 
+## Docker
+
+Build the production Docker image:
+
+```bash
+docker build -t spacex-explorer .
+```
+
+Run the container:
+
+```bash
+docker run --rm -p 8080:80 spacex-explorer
+```
+
+Then open `http://localhost:8080/` in your browser.
+
 ## Data source
 
 The SpaceX public API is temporarily unavailable, so the application uses the provided `launches.json` local mock data instead.
