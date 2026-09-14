@@ -1,0 +1,55 @@
+.container-launch {
+  padding: 24px;
+
+  .container-actions {
+    margin-bottom: 24px;
+  }
+
+  .launch-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .card-content {
+      padding-top: 16px;
+
+      .date-text {
+        align-items: center;
+        display: flex;
+        gap: 8px;
+
+        color: #64748b;
+        font-size: 14px;
+
+        mat-icon {
+          font-size: 18px;
+          height: 18px;
+          width: 18px;
+        }
+      }
+    }
+
+    .card-actions {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 16px;
+
+      .status-success {
+        background-color: #e2fbe8;
+        color: #1e7e34;
+      }
+
+      .status-error {
+        background-color: #fde8e8;
+        color: #c82333;
+      }
+    }
+  }
+}
