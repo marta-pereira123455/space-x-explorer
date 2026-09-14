@@ -14,7 +14,11 @@ import { Store } from '@ngrx/store';
 import { Launch } from '../../models/launch.model';
 
 import { loadLaunches } from '../../state/launch.actions';
-import { selectAllLaunches, selectError } from '../../state/launch.selectors';
+import {
+  selectAllLaunches,
+  selectError,
+  selectIsLoading,
+} from '../../state/launch.selectors';
 
 @Component({
   selector: 'app-launches-list',
@@ -37,6 +41,7 @@ export class LaunchesListComponent implements OnInit {
 
   allLaunches$!: Observable<Launch[]>;
   error$!: Observable<HttpErrorResponse | null>;
+  loading$!: Observable<boolean>;
   filteredLaunches: Launch[] = [];
   searchTerm = '';
 
@@ -50,6 +55,7 @@ export class LaunchesListComponent implements OnInit {
       }),
     );
     this.error$ = this.store.select(selectError);
+    this.loading$ = this.store.select(selectIsLoading);
   }
 
   onSearchChange(allLaunches: Launch[]) {
