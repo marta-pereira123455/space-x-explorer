@@ -1,9 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 
-import * as LaunchActions from './launch.actions';
-
 import { LaunchState } from '../models/launch-state.model';
 
+import * as LaunchActions from './launch.actions';
 
 export const initialState: LaunchState = {
   launches: [],

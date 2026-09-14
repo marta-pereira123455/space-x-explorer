@@ -16,3 +16,7 @@ export const selectFavoriteIds = createSelector(
   selectLaunchState,
   (state) => state.favoriteIds,
 );
+export const selectError = createSelector(
+  selectLaunchState,
+  (state) => state.error,
+);
