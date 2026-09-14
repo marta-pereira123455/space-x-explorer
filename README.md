@@ -1,41 +1,57 @@
-# Technical Assessment: Angular & NgRx "SpaceX Explorer" v1.0
+# SpaceX Explorer
 
-Welcome! The goal of this technical assessment is to refactor, debug, and finalize an Angular application built for exploring SpaceX rocket launches. 
+An Angular application for exploring SpaceX past launches.
 
-The application uses **Angular Material** for the UI and **NgRx** for global state management. However, the previous developer rushed the initial implementation. The current codebase contains memory leaks, performance bottlenecks, a critical architectural flaw inside the NgRx Reducer, and missing core async features.
+This project was developed as part of an Angular & NgRx technical assessment.
 
+## Features
 
-## 🎯 Your Missions
+* Browse SpaceX past launches
+* Search launches by mission name
+* View launch details
+* Add and remove launches from favorites
+* Persist favorite state while navigating between the list and details views
+* Loading and error state handling
 
-1. **Implement the Missing NgRx Effect:**
-   - Currently, the component triggers raw HTTP calls directly via the service. Refactor this logic so the component dispatches a `loadLaunches` action instead.
-   - Create a **NgRx Effect** from scratch to handle the asynchronous stream fetching data from the SpaceX API.
-2. **Feature Development (Details View & Favorites):**
-   - Implement the launch details view, mapped to the `/launch/:id` route.
-   - Leverage the NgRx store to manage the "Favorite" state of a launch. This state must persist seamlessly when navigating back and forth between the list and details views.
-3. **Project configuration :** 
-    - Configure the project to be production ready
+## Technologies
 
-## 🛠️ Technical Specifications
+* Angular 21
+* TypeScript
+* NgRx
+* RxJS
+* Angular Material
+* SCSS
 
-> ⚠️ **Note:** The SpaceX public API is temporarily unavailable. The application is currently using local mock data instead. The endpoints below are the ones that should normally be used — implement your solution as if the API were live (the service layer is already wired to the mock data for you).
+## Installation
 
-- **List Endpoint:** ~~`https://api.spacexdata.com/v4/launches/past`~~ → `launches.json` (local mock)
-- **Details Endpoint:** ~~`https://api.spacexdata.com/v4/launches/{id}`~~ → filtered from `launches.json` (local mock)
-- Angular Material is pre-installed. Baseline layouts and grid styling can be found in the component's SCSS file.
+Clone the repository and install the dependencies:
 
-## 📋 Evaluation Criteria
-- **Clean Architecture:** Proper separation of concerns (Smart vs. Presentational components, encapsulating logic away from templates).
-- **RxJS & NgRx Mastery:** Clean stream manipulation, avoiding nesting subscriptions, keeping the state strictly immutable, and leveraging memoized selectors.
-- **Modern Angular Standards:** Proper usage of Standalone components and modern control flow (or Signals if you choose to introduce them).
-- **TypeScript Rigor:** Explicit interface definitions for API payloads. The use of `any` is strictly prohibited.
-- **Git Hygiene:** Clean, atomic, and descriptive commit history.
+```bash
+git clone https://github.com/marta-pereira123455/space-x-explorer.git
+cd space-x-explorer
+npm install
+```
 
-## Bonus
-- Setup a docker production ready for this app
+## Development server
 
-## 📦 Submission Guidelines
-1. Push your code to a public GitHub repository.
-2. Create a new `README.md` and ensure it includes straightforward instructions to install and run the project locally 
+Run the application locally with:
 
-Good luck! We look forward to reviewing your code.
+```bash
+ng serve
+```
+
+Then open `http://localhost:4200/`.
+
+## Production build
+
+To create a production build:
+
+```bash
+ng build
+```
+
+The generated files will be available in the `dist/` directory.
+
+## Data source
+
+The SpaceX public API is temporarily unavailable, so the application uses the provided `launches.json` local mock data instead.
