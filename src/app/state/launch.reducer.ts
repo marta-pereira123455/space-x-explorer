@@ -6,7 +6,7 @@ import * as LaunchActions from './launch.actions';
 
 export const initialState: LaunchState = {
   error: null,
-  favoriteIds: [],
+  favoriteLaunches: [],
   launches: [],
   loading: false,
   selectedLaunch: null,

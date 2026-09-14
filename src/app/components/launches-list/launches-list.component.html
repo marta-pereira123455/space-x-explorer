@@ -1,23 +1,24 @@
-@if (loading$ | async) {
-  <p>Loading launches...</p>
-} @else if (error$ | async; as error) {
-  <mat-card class="error-card">
-    <mat-card-content>
-      <p>{{ error.message }}</p>
-    </mat-card-content>
-  </mat-card>
-} @else {
-  @if (allLaunches$ | async; as allLaunches) {
+@if (launchesListData$ | async; as data) {
+  @if (data.loading) {
+    <p>Loading launches...</p>
+  } @else if (data.error) {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <p>{{ data.error.message }}</p>
+      </mat-card-content>
+    </mat-card>
+  } @else {
     <div class="container-launches">
       <h1 class="mat-headline-medium title">SpaceX Launch Explorer</h1>
 
+      ```
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Search for a mission...</mat-label>
         <input
           matInput
           type="text"
           [(ngModel)]="searchTerm"
-          (ngModelChange)="onSearchChange(allLaunches)"
+          (ngModelChange)="onSearchChange(data.allLaunches)"
           placeholder="Ex. Crew-1"
         />
         <mat-icon matSuffix>search</mat-icon>
@@ -35,10 +36,20 @@
                 [src]="launch.links.mission_patch_small"
                 alt="Mission's patch"
               />
+
               <mat-card-title>{{ launch.mission_name }}</mat-card-title>
-              <mat-card-subtitle
-                >Flight n°{{ launch.flight_number }}</mat-card-subtitle
-              >
+
+              <mat-card-subtitle>
+                Flight n°{{ launch.flight_number }}
+              </mat-card-subtitle>
+
+              <mat-icon>
+                {{
+                  isFavorite(data.favoriteIds, launch.flight_number)
+                    ? 'star'
+                    : 'star_border'
+                }}
+              </mat-icon>
             </mat-card-header>
 
             <mat-card-content class="card-content">
@@ -62,5 +73,6 @@
         }
       </div>
     </div>
+    ```
   }
 }

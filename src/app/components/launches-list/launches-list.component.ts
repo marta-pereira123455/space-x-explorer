@@ -1,8 +1,8 @@
+import { combineLatest, map, Observable } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -18,6 +18,7 @@ import { loadLaunches } from '../../state/launch.actions';
 import {
   selectAllLaunches,
   selectError,
+  selectFavoriteLaunches,
   selectIsLoading,
 } from '../../state/launch.selectors';
 
@@ -41,23 +42,30 @@ export class LaunchesListComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly store = inject(Store);
 
-  allLaunches$!: Observable<Launch[]>;
-  error$!: Observable<HttpErrorResponse | null>;
-  loading$!: Observable<boolean>;
   filteredLaunches: Launch[] = [];
+  launchesListData$!: Observable<{
+    allLaunches: Launch[];
+    error: HttpErrorResponse | null;
+    favoriteIds: number[];
+    loading: boolean;
+  }>;
   searchTerm = '';
 
   ngOnInit() {
     this.store.dispatch(loadLaunches());
-    this.allLaunches$ = this.store.select(selectAllLaunches).pipe(
-      map((allLaunches) => {
+
+    this.launchesListData$ = combineLatest([
+      this.store.select(selectAllLaunches),
+      this.store.select(selectError),
+      this.store.select(selectFavoriteLaunches),
+      this.store.select(selectIsLoading),
+    ]).pipe(
+      map(([allLaunches, error, favoriteIds, loading]) => {
         this.filteredLaunches = allLaunches;
 
-        return allLaunches;
+        return { allLaunches, error, favoriteIds, loading };
       }),
     );
-    this.error$ = this.store.select(selectError);
-    this.loading$ = this.store.select(selectIsLoading);
   }
 
   navigateToLaunch(flightNumber: number) {
@@ -68,5 +76,9 @@ export class LaunchesListComponent implements OnInit {
     this.filteredLaunches = allLaunches.filter((launch: Launch) =>
       launch.mission_name.toLowerCase().includes(this.searchTerm.toLowerCase()),
     );
+  }
+
+  isFavorite(favoriteIds: number[], flightNumber: number): boolean {
+    return favoriteIds.includes(flightNumber);
   }
 }

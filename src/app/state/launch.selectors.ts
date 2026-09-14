@@ -12,9 +12,9 @@ export const selectIsLoading = createSelector(
   selectLaunchState,
   (state) => state.loading,
 );
-export const selectFavoriteIds = createSelector(
+export const selectFavoriteLaunches = createSelector(
   selectLaunchState,
-  (state) => state.favoriteIds,
+  (state) => state.favoriteLaunches,
 );
 export const selectError = createSelector(
   selectLaunchState,

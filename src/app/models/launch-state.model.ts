@@ -4,7 +4,7 @@ import { Launch } from "./launch.model";
 
 export interface LaunchState {
   error: HttpErrorResponse | null;
-  favoriteIds: string[];
+  favoriteLaunches: number[];
   launches: Launch[];
   loading: boolean;
   selectedLaunch: Launch | null;
