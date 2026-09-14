@@ -60,7 +60,7 @@ export class LaunchesListComponent implements OnInit {
 
   onSearchChange(allLaunches: Launch[]) {
     this.filteredLaunches = allLaunches.filter((launch: Launch) =>
-      launch.mission_name.includes(this.searchTerm),
+      launch.mission_name.toLowerCase().includes(this.searchTerm.toLowerCase()),
     );
   }
 }
