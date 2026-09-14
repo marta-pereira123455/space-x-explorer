@@ -12,3 +12,16 @@ export const loadLaunchesFailure = createAction(
   '[Launch List] Load Failure',
   props<{ error: HttpErrorResponse }>(),
 );
+
+export const loadLaunch = createAction(
+  '[Launch] Load Launch',
+  props<{ flightNumber: number }>(),
+);
+export const loadLaunchSuccess = createAction(
+  '[Launch] Load Success',
+  props<{ launch: Launch }>(),
+);
+export const loadLaunchFailure = createAction(
+  '[Launch] Load Failure',
+  props<{ error: HttpErrorResponse }>(),
+);

@@ -5,10 +5,11 @@ import { LaunchState } from '../models/launch-state.model';
 import * as LaunchActions from './launch.actions';
 
 export const initialState: LaunchState = {
-  launches: [],
-  favoriteIds: [],
-  loading: false,
   error: null,
+  favoriteIds: [],
+  launches: [],
+  loading: false,
+  selectedLaunch: null,
 };
 
 export const launchReducer = createReducer(
@@ -20,6 +21,17 @@ export const launchReducer = createReducer(
     launches,
   })),
   on(LaunchActions.loadLaunchesFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+  on(LaunchActions.loadLaunch, (state) => ({ ...state, loading: true })),
+  on(LaunchActions.loadLaunchSuccess, (state, { launch }) => ({
+    ...state,
+    loading: false,
+    selectedLaunch: launch,
+  })),
+  on(LaunchActions.loadLaunchFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,

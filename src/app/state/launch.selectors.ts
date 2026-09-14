@@ -20,3 +20,7 @@ export const selectError = createSelector(
   selectLaunchState,
   (state) => state.error,
 );
+export const selectSelectedLaunch = createSelector(
+  selectLaunchState,
+  (state) => state.selectedLaunch,
+);
