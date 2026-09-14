@@ -14,10 +14,15 @@ export const initialState: LaunchState = {
 
 export const launchReducer = createReducer(
   initialState,
-  on(LaunchActions.loadLaunches, (state) => ({ ...state, loading: true })),
+  on(LaunchActions.loadLaunches, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
   on(LaunchActions.loadLaunchesSuccess, (state, { launches }) => ({
     ...state,
     loading: false,
+    error: null,
     launches,
   })),
   on(LaunchActions.loadLaunchesFailure, (state, { error }) => ({
@@ -25,10 +30,16 @@ export const launchReducer = createReducer(
     loading: false,
     error,
   })),
-  on(LaunchActions.loadLaunch, (state) => ({ ...state, loading: true })),
+
+  on(LaunchActions.loadLaunch, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
   on(LaunchActions.loadLaunchSuccess, (state, { launch }) => ({
     ...state,
     loading: false,
+    error: null,
     selectedLaunch: launch,
   })),
   on(LaunchActions.loadLaunchFailure, (state, { error }) => ({
@@ -36,6 +47,7 @@ export const launchReducer = createReducer(
     loading: false,
     error,
   })),
+
   on(LaunchActions.toggleFavorite, (state, { flightNumber }) => {
     const isFavorite = state.favoriteLaunches.includes(flightNumber);
 
